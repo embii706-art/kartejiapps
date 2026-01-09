@@ -1,4 +1,4 @@
-export function renderHome() {
+export async function home() {
   return `
     <section class="p-4 space-y-4">
       <div class="rounded-xl bg-card p-4 shadow">

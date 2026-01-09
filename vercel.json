@@ -1,0 +1,17 @@
+{
+  "buildCommand": null,
+  "outputDirectory": "KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
