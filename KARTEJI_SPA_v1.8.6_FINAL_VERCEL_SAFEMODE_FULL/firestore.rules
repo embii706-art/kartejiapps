@@ -25,10 +25,64 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    match /activities/{id} {
+      allow read: if isSignedIn() && isApproved();
+      allow create: if isSignedIn() && isApproved() 
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("wakil_ketua") || hasRole("sekretaris"));
+      allow update, delete: if isSignedIn() && isApproved()
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("wakil_ketua") || hasRole("sekretaris"));
+    }
+
     match /activities/{id}/attendance/{uid} {
       allow read: if isSignedIn() && isApproved();
       allow update: if isSignedIn() && isApproved()
         && (hasRole("super_admin") || hasRole("ketua") || hasRole("wakil_ketua") || hasRole("sekretaris"));
+    }
+
+    match /feed/{id} {
+      allow read: if isSignedIn() && isApproved();
+      allow create, update, delete: if isSignedIn() && isApproved()
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("wakil_ketua") || hasRole("sekretaris"));
+    }
+
+    match /finance/{id} {
+      allow read: if isSignedIn() && isApproved();
+      allow create, update, delete: if isSignedIn() && isApproved()
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("bendahara"));
+    }
+
+    match /calendar_events/{id} {
+      allow read: if isSignedIn() && isApproved();
+      allow create, update, delete: if isSignedIn() && isApproved()
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("sekretaris"));
+    }
+
+    match /members/{uid} {
+      allow read: if isSignedIn() && isApproved();
+      allow create, update, delete: if isSignedIn() && isApproved()
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("sekretaris"));
+    }
+
+    match /minutes/{id} {
+      allow read: if isSignedIn() && isApproved();
+      allow create, update, delete: if isSignedIn() && isApproved()
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("sekretaris"));
+    }
+
+    match /documents/{id} {
+      allow read: if isSignedIn() && isApproved();
+      allow create, update, delete: if isSignedIn() && isApproved()
+        && (hasRole("super_admin") || hasRole("ketua") || hasRole("sekretaris"));
+    }
+
+    match /periods/{id} {
+      allow read: if isSignedIn() && isApproved();
+      allow create, update, delete: if isSignedIn() && isApproved()
+        && hasRole("super_admin");
+    }
+
+    match /rate_limits/{key} {
+      allow read, write: if false;
     }
   }
 }
