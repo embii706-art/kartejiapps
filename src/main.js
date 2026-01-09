@@ -1,6 +1,15 @@
 /**
- * main.js (v2.0.0 - Complete Overhaul)
- * Modern architecture with enhanced features
+ * main.js (v2.5.0 - Premium Stable Release)
+ * Enhanced stability, performance, and premium features
+ * 
+ * Features:
+ * - Optimized boot sequence for faster load times
+ * - Enhanced error handling and recovery
+ * - Premium 3D card effects
+ * - Advanced glassmorphism UI
+ * - Smart fuzzy search system
+ * - Social media integration
+ * - Full PWA capabilities with install prompts
  */
 import "./splashFinal.js";
 

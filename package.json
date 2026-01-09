@@ -1,0 +1,42 @@
+{
+  "name": "karteji-spa",
+  "version": "2.5.0",
+  "description": "KARTEJI - Modern Organization Management SPA with Premium Features",
+  "type": "module",
+  "author": "KARTEJI Team",
+  "license": "UNLICENSED",
+  "private": true,
+  "keywords": [
+    "spa",
+    "pwa",
+    "organization-management",
+    "firebase",
+    "glassmorphism",
+    "3d-effects"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/embii706-art/kartejiapps.git"
+  },
+  "scripts": {
+    "dev": "npx live-server public --port=3000",
+    "preview": "npx live-server public --port=8080",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
+    "lint": "echo 'No linting configured'",
+    "format": "echo 'No formatting configured'",
+    "firebase:deploy": "cd functions && npm install && cd .. && firebase deploy",
+    "firebase:functions": "firebase deploy --only functions",
+    "firebase:rules": "firebase deploy --only firestore:rules"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
+}

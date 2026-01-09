@@ -1,5 +1,7 @@
 {
   "name": "karteji-functions",
+  "version": "2.5.0",
+  "description": "KARTEJI Cloud Functions - Firebase Backend",
   "private": true,
   "engines": {
     "node": "18"
