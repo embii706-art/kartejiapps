@@ -92,7 +92,7 @@ window.addEventListener('unhandledrejection', (e) => {
     setOGMetaTags({
       title: 'KARTEJI - Modern Organization Management',
       description: 'Modern SPA with premium UI for organization management',
-      image: '/public/icon-512.png'
+      image: '/icon-512.png'
     });
 
     // Start router
@@ -103,7 +103,7 @@ window.addEventListener('unhandledrejection', (e) => {
     await withTimeout(initFirebase(), 8000, "initFirebase timeout");
 
     // Register enhanced service worker
-    await registerServiceWorker('/public/sw.js');
+    await registerServiceWorker('/sw.js');
 
     // Dynamic theme overlay (timeout anti-hang)
     await withTimeout(themeEvents.init(), 5000, "themeEvents timeout").catch(() => {});

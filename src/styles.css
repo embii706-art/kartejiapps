@@ -142,9 +142,10 @@
   border-radius: 2px;
 }
 
-/* Smooth Transitions */
-* {
-  transition-property: background-color, border-color, color;
+/* Smooth Transitions - Applied to specific elements */
+a, button, input, select, textarea,
+.card, .btn, .nav-item {
+  transition-property: background-color, border-color, color, transform, opacity;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }

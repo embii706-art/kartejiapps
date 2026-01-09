@@ -9,12 +9,12 @@ const RUNTIME_CACHE = 'karteji-runtime-v2.5.0';
 const APP_SHELL = [
   '/',
   '/index.html',
-  '/public/manifest.json',
-  '/public/icon-192.png',
-  '/public/icon-512.png',
-  '/public/icon-maskable-192.png',
-  '/public/icon-maskable-512.png',
-  '/public/apple-touch-icon.png'
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/icon-maskable-192.png',
+  '/icon-maskable-512.png',
+  '/apple-touch-icon.png'
 ];
 
 // Install event - cache app shell
