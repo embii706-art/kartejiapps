@@ -1,13 +1,14 @@
 /**
- * main.js (v1.8.5 HANGFIX)
- * Target: Vercel/PWA kadang stuck di splash karena promise hang (auth/themeEvents/fetch)
- * Solusi:
- * - Watchdog: splash hilang maksimal 5 detik apapun yang terjadi
- * - Timeout wrapper untuk initFirebase + themeEvents
- * - Router start dilakukan lebih awal agar UI pasti muncul
- * - Global error/unhandledrejection -> toast + hide splash
+ * main.js - v2.5.0
+ * Enhanced with new v2.5.0 features:
+ * - 3D Card Effects
+ * - Glassmorphism UI
+ * - Smart Search
+ * - Social Sharing
+ * - Enhanced PWA Support
  */
 import "./splashFinal.js";
+import "./styles.css";
 
 import { initFirebase } from './lib/firebase.js';
 import { router } from './router.js';
@@ -17,10 +18,16 @@ import { theme } from './lib/theme.js';
 import { net } from './lib/net.js';
 import { themeEvents } from './lib/themeEvents.js';
 
+// v2.5.0 Feature Imports
+import { initCard3D } from './utils/card3d.js';
+import { initPWA, registerServiceWorker } from './utils/pwa.js';
+import { setOGMetaTags } from './utils/share.js';
+
+// Make toast available globally for utilities
+window.toast = toast;
+
 function removeSplash(reason = "") {
-  // 1) splashFinal API (jika ada)
   try { window.KARTEJI_SPLASH?.done(reason); } catch {}
-  // 2) fallback: remove #splash element
   const splash = document.getElementById('splash');
   if (splash) {
     splash.classList.add('opacity-0');
@@ -36,22 +43,21 @@ function withTimeout(promise, ms, label = "timeout") {
   return Promise.race([promise, timeout]).finally(() => clearTimeout(t));
 }
 
-// Watchdog: jangan pernah stuck lebih dari 5 detik
+// Watchdog: prevent getting stuck
 const watchdog = setTimeout(() => {
   removeSplash("Menyiapkan aplikasi…");
-  // kalau app masih kosong, tampilkan fallback agar tidak putih
   const app = document.getElementById('app');
   if (app && !app.innerHTML.trim()) {
     app.innerHTML = `
       <section class="p-4 space-y-3 max-w-md mx-auto">
-        <div class="rounded-2xl border border-border p-4">
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-700 p-4 glass">
           <h2 class="font-semibold">Aplikasi siap, namun UI belum muncul.</h2>
           <p class="text-sm opacity-80 mt-1">
             Ini biasanya karena modul JS terhambat (cache PWA / jaringan / hosting).
           </p>
           <div class="flex gap-2 mt-3">
-            <button id="btnReload" class="w-full rounded-xl px-4 py-2 bg-primary text-white">Muat Ulang</button>
-            <button id="btnHome" class="w-full rounded-xl px-4 py-2 border border-border">Buka Home</button>
+            <button id="btnReload" class="w-full rounded-xl px-4 py-2 btn-gradient">Muat Ulang</button>
+            <button id="btnHome" class="w-full rounded-xl px-4 py-2 border border-slate-300 dark:border-slate-600">Buka Home</button>
           </div>
         </div>
       </section>
@@ -66,6 +72,7 @@ window.addEventListener('error', (e) => {
   toast('Terjadi kesalahan saat memuat aplikasi.');
   removeSplash("Terjadi kendala…");
 });
+
 window.addEventListener('unhandledrejection', (e) => {
   console.error("UNHANDLED", e?.reason || e);
   toast('Terjadi kesalahan saat memuat aplikasi.');
@@ -73,29 +80,43 @@ window.addEventListener('unhandledrejection', (e) => {
 });
 
 (async function boot(){
-  try{
+  try {
+    // Initialize theme and network detection
     theme.init();
     net.init();
 
-    // Mulai router dulu supaya UI tidak kosong walau Firebase lambat
+    // Initialize v2.5.0 PWA features
+    initPWA();
+    
+    // Set Open Graph meta tags
+    setOGMetaTags({
+      title: 'KARTEJI - Modern Organization Management',
+      description: 'Modern SPA with premium UI for organization management',
+      image: '/icon-512.png'
+    });
+
+    // Start router
     mountBottomNav();
     router.start();
 
     // Firebase (timeout anti-hang)
     await withTimeout(initFirebase(), 8000, "initFirebase timeout");
 
-    // PWA SW - pastikan path absolut (di Vercel sering gagal kalau relatif dari /src)
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(()=>{});
-    }
+    // Register enhanced service worker
+    await registerServiceWorker('/sw.js');
 
     // Dynamic theme overlay (timeout anti-hang)
-    await withTimeout(themeEvents.init(), 5000, "themeEvents timeout").catch(()=>{});
+    await withTimeout(themeEvents.init(), 5000, "themeEvents timeout").catch(() => {});
 
-  }catch(err){
+    // Initialize 3D card effects after DOM is ready
+    setTimeout(() => {
+      initCard3D('.card-3d');
+    }, 500);
+
+  } catch(err) {
     console.error(err);
     toast('Terjadi kesalahan saat memuat aplikasi.');
-  }finally{
+  } finally {
     clearTimeout(watchdog);
     removeSplash("");
   }

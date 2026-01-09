@@ -1,10 +1,13 @@
 {
-  "name": "KARTEJI",
+  "name": "KARTEJI v2.5.0",
   "short_name": "KARTEJI",
+  "description": "Modern organization management with premium UI",
+  "version": "2.5.0",
   "start_url": "./#/home",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#0F172A",
+  "orientation": "portrait",
+  "background_color": "#0a0f1e",
+  "theme_color": "#667eea",
   "icons": [
     {
       "src": "./icon-192.png",
@@ -29,6 +32,17 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Home",
+      "short_name": "Home",
+      "description": "Go to home page",
+      "url": "./#/home",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
