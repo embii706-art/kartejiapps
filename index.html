@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#6366F1" />
+  <meta name="description" content="KARTEJI V2.5 - Modern management system with premium UI, 3D effects, glassmorphism, smart search, and social sharing" />
+  <meta name="keywords" content="karteji, management, pwa, 3d, glassmorphism, modern ui" />
+  <meta name="author" content="KARTEJI Team" />
+  
+  <!-- PWA Meta Tags -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="KARTEJI" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KARTEJI V2.5" />
+  <meta property="og:description" content="Advanced management system with premium UI and smart features" />
+  <meta property="og:image" content="/icon-512.png" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KARTEJI V2.5" />
+  <meta name="twitter:description" content="Advanced management system with premium UI and smart features" />
+  <meta name="twitter:image" content="/icon-512.png" />
+  
+  <title>KARTEJI V2.5 - Modern Management System</title>
+
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" href="/apple-touch-icon.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { 
+      darkMode: 'class', 
+      theme: { 
+        extend: {
+          colors: {
+            primary: '#6366F1',
+            secondary: '#EC4899',
+            accent: '#A855F7'
+          }
+        } 
+      } 
+    }
+  </script>
+  
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+
+<body class="text-slate-900 dark:text-slate-100">
+  <!-- Enhanced Splash Screen with Premium Design -->
+  <div id="splash" class="fixed inset-0 z-[9999] flex items-center justify-center">
+    <div class="w-[min(400px,92vw)] glass-card rounded-3xl p-6 shadow-2xl text-center animate-splashPop">
+      <div class="relative inline-block">
+        <img src="/apple-touch-icon.png" alt="Logo KARTEJI" class="w-20 h-20 mx-auto rounded-2xl shadow-lg object-cover animate-float" />
+        <div class="absolute -top-1 -right-1 w-6 h-6 bg-gradient-primary rounded-full flex items-center justify-center text-white text-xs font-bold">
+          2.5
+        </div>
+      </div>
+      <div class="mt-4 text-2xl font-extrabold gradient-text tracking-wide">KARTEJI</div>
+      <div class="mt-1 text-sm font-medium opacity-60">Version 2.5 - Premium Edition</div>
+      <div id="splashText" class="mt-3 text-sm opacity-70">Memuat aplikasi...</div>
+      
+      <!-- Premium Progress Bar -->
+      <div class="mt-5 h-2 rounded-full bg-slate-200/50 dark:bg-slate-700/50 overflow-hidden relative">
+        <div class="h-full rounded-full bg-gradient-primary animate-pulse" style="width: 33%"></div>
+      </div>
+      
+      <!-- Feature Tags -->
+      <div class="mt-5 flex flex-wrap gap-2 justify-center text-xs">
+        <span class="px-3 py-1 rounded-full glass text-indigo-600 dark:text-indigo-400">3D Effects</span>
+        <span class="px-3 py-1 rounded-full glass text-pink-600 dark:text-pink-400">Glassmorphism</span>
+        <span class="px-3 py-1 rounded-full glass text-purple-600 dark:text-purple-400">Smart Search</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="app" class="min-h-screen"></main>
+
+  <script>
+    (function(){
+      const splash = document.getElementById('splash');
+      const splashText = document.getElementById('splashText');
+      const app = document.getElementById('app');
+
+      function hideSplash(){
+        if(!splash) return;
+        splash.style.opacity = '0';
+        splash.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(()=> splash.remove(), 420);
+      }
+
+      function showError(title, detail){
+        hideSplash();
+        app.innerHTML = `
+          <section class="p-4 max-w-md mx-auto space-y-3 min-h-screen flex items-center">
+            <div class="w-full glass-card rounded-2xl p-6 animate-fadeIn">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 mx-auto rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                  <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="font-bold text-lg text-center mb-2">${title}</div>
+              <div class="text-sm opacity-80 mb-4">${detail}</div>
+              <div class="flex gap-2">
+                <button id="btnReload" class="flex-1 btn-premium rounded-xl px-4 py-3 font-semibold">
+                  Muat Ulang
+                </button>
+                <button id="btnBypass" class="flex-1 rounded-xl px-4 py-3 glass-card font-semibold">
+                  Lewati
+                </button>
+              </div>
+              <div class="text-xs opacity-60 mt-4 text-center">
+                💡 Tips: Hapus cache browser atau reinstall PWA
+              </div>
+            </div>
+          </section>
+        `;
+        document.getElementById('btnReload')?.addEventListener('click', ()=> location.reload());
+        document.getElementById('btnBypass')?.addEventListener('click', ()=> { hideSplash(); location.hash = '#/home'; });
+      }
+
+      // Auto-hide splash after timeout
+      const splashTimeout = setTimeout(()=>{
+        if (splashText) splashText.textContent = 'Menyiapkan aplikasi...';
+        if (splash && document.body.contains(splash)) {
+          hideSplash();
+          if (app && !app.innerHTML.trim()) {
+            app.innerHTML = `
+              <section class="p-4 max-w-md mx-auto min-h-screen flex items-center">
+                <div class="w-full glass-card rounded-2xl p-6">
+                  <div class="text-center mb-4">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+                      <svg class="w-8 h-8 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="font-bold text-center mb-2">UI Belum Tampil</div>
+                  <div class="text-sm opacity-80 text-center">
+                    JavaScript utama mungkin tidak termuat. Periksa console atau coba reload.
+                  </div>
+                </div>
+              </section>
+            `;
+          }
+        }
+      }, 5000);
+
+      // Load main application
+      (async () => {
+        try {
+          if (splashText) splashText.textContent = 'Memuat modul utama...';
+          await import('/src/main.js');
+          clearTimeout(splashTimeout);
+          
+          // Give a moment for app to initialize before hiding splash
+          setTimeout(hideSplash, 500);
+        } catch (e) {
+          clearTimeout(splashTimeout);
+          console.error('MAIN MODULE ERROR', e);
+          const msg = (e && e.message) ? e.message : String(e);
+          showError(
+            'Gagal Memuat Aplikasi',
+            `<code class="text-xs bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded">${msg.replace(/</g,'&lt;')}</code><br/><br/>File <code>/src/main.js</code> mungkin tidak ada di deployment.`
+          );
+        }
+      })();
+
+      // Register Service Worker for PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('[PWA] Service Worker registered:', reg.scope))
+            .catch(err => console.error('[PWA] Service Worker registration failed:', err));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

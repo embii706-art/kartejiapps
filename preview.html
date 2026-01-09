@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARTEJI V2.5 - Feature Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { 
+      darkMode: 'class', 
+      theme: { 
+        extend: {
+          colors: {
+            primary: '#6366F1',
+            secondary: '#EC4899',
+            accent: '#A855F7'
+          }
+        } 
+      } 
+    }
+  </script>
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body class="min-h-screen">
+  <div class="container mx-auto p-4 max-w-6xl">
+    <!-- Header -->
+    <header class="glass-card rounded-3xl p-8 mb-6 text-center card-shine">
+      <div class="inline-block relative mb-4 animate-float">
+        <div class="w-24 h-24 rounded-2xl bg-gradient-primary flex items-center justify-center text-white text-4xl font-bold shadow-2xl">
+          K
+        </div>
+        <div class="absolute -top-2 -right-2 w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+          2.5
+        </div>
+      </div>
+      <h1 class="gradient-text text-5xl font-bold mb-3">KARTEJI V2.5</h1>
+      <p class="text-xl opacity-70">Premium Edition Feature Preview</p>
+      
+      <!-- Theme Toggle -->
+      <button onclick="document.documentElement.classList.toggle('dark')" 
+              class="mt-4 px-6 py-3 rounded-xl glass-card hover:glass-card-hover transition-all">
+        🌓 Toggle Dark Mode
+      </button>
+    </header>
+
+    <!-- Feature 1: Glassmorphism UI -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">💎 Glassmorphism UI</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="glass-card rounded-2xl p-6 hover:glass-card-hover transition-all">
+          <div class="text-4xl mb-3">✨</div>
+          <h3 class="font-bold text-lg mb-2">Frosted Glass</h3>
+          <p class="text-sm opacity-80">Semi-transparent cards with backdrop blur for a modern premium look</p>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-6 hover:glass-card-hover transition-all">
+          <div class="text-4xl mb-3">🎨</div>
+          <h3 class="font-bold text-lg mb-2">Layered Depth</h3>
+          <p class="text-sm opacity-80">Multiple glass layers create visual hierarchy and depth</p>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-6 hover:glass-card-hover transition-all">
+          <div class="text-4xl mb-3">💫</div>
+          <h3 class="font-bold text-lg mb-2">Smooth Blur</h3>
+          <p class="text-sm opacity-80">Adjustable backdrop blur from 4px to 24px</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2: 3D Card Effects -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">🎲 Interactive 3D Cards</h2>
+      <p class="mb-4 opacity-70">Hover over cards to see the 3D tilt effect!</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card-3d glass-card rounded-2xl p-6">
+          <div class="text-4xl mb-3">🎯</div>
+          <h3 class="font-bold text-lg mb-2">Tilt Effect</h3>
+          <p class="text-sm opacity-80">Cards respond to mouse movement with realistic 3D tilting</p>
+        </div>
+        
+        <div class="card-3d glass-card rounded-2xl p-6">
+          <div class="text-4xl mb-3">🔄</div>
+          <h3 class="font-bold text-lg mb-2">Flip Animation</h3>
+          <p class="text-sm opacity-80">Smooth card flipping on click or hover</p>
+        </div>
+        
+        <div class="card-3d glass-card rounded-2xl p-6">
+          <div class="text-4xl mb-3">📐</div>
+          <h3 class="font-bold text-lg mb-2">Parallax Depth</h3>
+          <p class="text-sm opacity-80">Multi-layer parallax creates depth illusion</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 3: Premium Gradients -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">🌈 Premium Gradients</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="gradient-primary text-white rounded-2xl p-6 text-center font-bold">
+          Primary
+        </div>
+        <div class="gradient-1 text-white rounded-2xl p-6 text-center font-bold">
+          Gradient 1
+        </div>
+        <div class="gradient-2 text-white rounded-2xl p-6 text-center font-bold">
+          Gradient 2
+        </div>
+        <div class="gradient-3 text-white rounded-2xl p-6 text-center font-bold">
+          Gradient 3
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 4: Smart Search -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">🔍 Smart Search</h2>
+      <div class="glass-card rounded-2xl p-6">
+        <div class="flex gap-2 items-center mb-4">
+          <div class="flex-1 relative">
+            <input 
+              type="text" 
+              placeholder="Try searching... (e.g., 'calendr' will find 'calendar')"
+              class="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <div class="absolute right-3 top-3 text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div class="px-3 py-2 rounded-lg glass text-center text-sm">
+            ✓ Fuzzy Matching
+          </div>
+          <div class="px-3 py-2 rounded-lg glass text-center text-sm">
+            ✓ Category Filter
+          </div>
+          <div class="px-3 py-2 rounded-lg glass text-center text-sm">
+            ✓ Live Suggestions
+          </div>
+          <div class="px-3 py-2 rounded-lg glass text-center text-sm">
+            ✓ Highlight Results
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 5: Social Sharing -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">📱 Social Sharing</h2>
+      <div class="glass-card rounded-2xl p-6">
+        <p class="mb-4 opacity-70">Share to multiple platforms with one click</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <button class="glass-card hover:glass-card-hover px-4 py-3 rounded-xl flex items-center gap-2 transition-all">
+            <span class="text-2xl">📘</span>
+            <span class="font-medium">Facebook</span>
+          </button>
+          <button class="glass-card hover:glass-card-hover px-4 py-3 rounded-xl flex items-center gap-2 transition-all">
+            <span class="text-2xl">🐦</span>
+            <span class="font-medium">Twitter</span>
+          </button>
+          <button class="glass-card hover:glass-card-hover px-4 py-3 rounded-xl flex items-center gap-2 transition-all">
+            <span class="text-2xl">💬</span>
+            <span class="font-medium">WhatsApp</span>
+          </button>
+          <button class="glass-card hover:glass-card-hover px-4 py-3 rounded-xl flex items-center gap-2 transition-all">
+            <span class="text-2xl">✈️</span>
+            <span class="font-medium">Telegram</span>
+          </button>
+          <button class="glass-card hover:glass-card-hover px-4 py-3 rounded-xl flex items-center gap-2 transition-all">
+            <span class="text-2xl">💼</span>
+            <span class="font-medium">LinkedIn</span>
+          </button>
+          <button class="glass-card hover:glass-card-hover px-4 py-3 rounded-xl flex items-center gap-2 transition-all">
+            <span class="text-2xl">📧</span>
+            <span class="font-medium">Email</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 6: PWA Enhancement -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">📲 Enhanced PWA</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-bold text-lg mb-3">✨ New Features</h3>
+          <ul class="space-y-2 text-sm opacity-80">
+            <li>✓ App Shortcuts - Quick access from home screen</li>
+            <li>✓ Share Target - Receive shares from other apps</li>
+            <li>✓ Protocol Handlers - Custom URL schemes</li>
+            <li>✓ Advanced Service Worker - Smart caching</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="font-bold text-lg mb-3">⚡ Performance</h3>
+          <ul class="space-y-2 text-sm opacity-80">
+            <li>✓ Offline First - Full offline functionality</li>
+            <li>✓ Background Sync - Auto sync when online</li>
+            <li>✓ Push Notifications - Real-time updates</li>
+            <li>✓ Fast Load - Optimized caching strategy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Premium Buttons -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">🎨 Premium Buttons</h2>
+      <div class="flex flex-wrap gap-4">
+        <button class="btn-premium px-6 py-3 rounded-xl font-semibold">
+          Primary Button
+        </button>
+        <button class="btn-premium px-6 py-3 rounded-xl font-semibold">
+          Action Button
+        </button>
+        <button class="btn-premium px-6 py-3 rounded-xl font-semibold">
+          Get Started
+        </button>
+      </div>
+    </section>
+
+    <!-- Animated Cards -->
+    <section class="mb-8">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">✨ Animations</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="glass-card rounded-xl p-4 text-center animate-fadeIn">
+          <div class="text-2xl mb-2">Fade In</div>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-slideIn">
+          <div class="text-2xl mb-2">Slide In</div>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-bounce">
+          <div class="text-2xl mb-2">Bounce</div>
+        </div>
+        <div class="glass-card rounded-xl p-4 text-center animate-float">
+          <div class="text-2xl mb-2">Float</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-card rounded-2xl p-6 text-center">
+      <div class="gradient-text text-2xl font-bold mb-2">KARTEJI V2.5</div>
+      <p class="text-sm opacity-70 mb-4">Premium Edition - Production Ready</p>
+      <div class="flex justify-center gap-4 text-xs">
+        <span class="px-3 py-1 rounded-full glass">3D Effects</span>
+        <span class="px-3 py-1 rounded-full glass">Glassmorphism</span>
+        <span class="px-3 py-1 rounded-full glass">Smart Search</span>
+        <span class="px-3 py-1 rounded-full glass">Social Share</span>
+        <span class="px-3 py-1 rounded-full glass">PWA Ready</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Initialize 3D effects -->
+  <script type="module">
+    import Card3D from '/src/components/Card3D.js';
+    
+    const card3d = new Card3D();
+    card3d.initAll('.card-3d', {
+      maxTilt: 20,
+      scale: 1.05,
+      glare: true,
+      speed: 300
+    });
+  </script>
+</body>
+</html>
