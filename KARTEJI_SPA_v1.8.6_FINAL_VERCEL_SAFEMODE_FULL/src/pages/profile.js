@@ -8,6 +8,23 @@ export async function profile(){
   const displayName = user?.displayName || user?.email || 'Pengguna';
   const email = user?.email || 'Tidak ada email';
 
+  // Setup event listener immediately after render
+  setTimeout(() => {
+    const btnLogout = document.getElementById('btnLogout');
+    if (btnLogout) {
+      btnLogout.addEventListener('click', async () => {
+        try {
+          await signOut(auth);
+          toast('Berhasil keluar');
+          location.hash = '#/auth/masuk';
+        } catch (e) {
+          console.error(e);
+          toast('Gagal keluar: ' + e.message);
+        }
+      });
+    }
+  }, 50);
+
   return `
     <section class="p-4 space-y-4 max-w-md mx-auto">
       <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6">
@@ -58,20 +75,3 @@ export async function profile(){
 function escapeHtml(s){
   return (s||'').replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
 }
-
-// Setup event listeners after render
-setTimeout(() => {
-  const btnLogout = document.getElementById('btnLogout');
-  if (btnLogout) {
-    btnLogout.addEventListener('click', async () => {
-      try {
-        await signOut(auth);
-        toast('Berhasil keluar');
-        location.hash = '#/auth/masuk';
-      } catch (e) {
-        console.error(e);
-        toast('Gagal keluar: ' + e.message);
-      }
-    });
-  }
-}, 100);
