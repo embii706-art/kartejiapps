@@ -15,6 +15,15 @@ export async function uploadToCloudinary(file){
 
 export function cloudinarySmart(url, w=900){
   // lightweight transform if already cloudinary
-  if(!url || !url.includes('res.cloudinary.com')) return url;
+  if(!url) return url;
+  
+  // More robust check: ensure it's a proper Cloudinary URL
+  try {
+    const urlObj = new URL(url);
+    if(!urlObj.hostname.endsWith('.cloudinary.com')) return url;
+  } catch {
+    return url; // Invalid URL, return as-is
+  }
+  
   return url.replace('/upload/','/upload/f_auto,q_auto,w_'+w+'/');
 }
