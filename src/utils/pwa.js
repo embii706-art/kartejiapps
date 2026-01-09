@@ -110,7 +110,7 @@ export function canInstall() {
 /**
  * Register service worker
  */
-export async function registerServiceWorker(swPath = '/sw.js') {
+export async function registerServiceWorker(swPath = '/public/sw.js') {
   if (!('serviceWorker' in navigator)) {
     console.log('Service Worker not supported');
     return false;
