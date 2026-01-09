@@ -1,5 +1,5 @@
 
-const CACHE = 'karteji-v1.8.0';
+const CACHE = 'karteji-v1.8.6';
 const APP_SHELL = [
   './',
   './index.html',
@@ -7,8 +7,23 @@ const APP_SHELL = [
   './src/main.js',
   './src/router.js',
   './src/render.js',
+  './src/splashFinal.js',
   './src/styles.css',
+  './src/lib/firebase.js',
+  './src/lib/gates.js',
+  './src/lib/theme.js',
+  './src/lib/net.js',
+  './src/lib/ui.js',
+  './src/lib/themeEvents.js',
+  './src/lib/cloudinary.js',
+  './src/components/BottomNav.js',
+  './src/components/Toast.js',
   './src/pages/index.js',
+  './src/pages/home.js',
+  './src/pages/auth/masuk.js',
+  './src/pages/auth/daftar.js',
+  './src/pages/auth/buatProfil.js',
+  './src/pages/pending.js',
   './assets/logo.png',
   './icon-192.png',
   './icon-512.png',
