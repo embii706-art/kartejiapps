@@ -1,5 +1,5 @@
 
-import { auth } from '../lib/firebase.js';
+import { auth } from '../utils/firebase.js';
 import { signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { toast } from '../components/Toast.js';
 

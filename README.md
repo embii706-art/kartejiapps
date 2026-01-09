@@ -1,32 +1,73 @@
-# KARTEJI - Aplikasi Manajemen Organisasi
+# KARTEJI - Modern Organization Management App
 
-Aplikasi web Progressive Web App (PWA) untuk manajemen organisasi dengan fitur lengkap.
+A modern Progressive Web App (PWA) for organization management with engaging features and glassmorphism UI.
 
-## Teknologi
-- HTML5 + Tailwind CSS (CDN)
-- Vanilla JavaScript (ES Modules)
-- Firebase v9 (Auth, Firestore, Functions)
-- Cloudinary (Upload Media)
-- PWA dengan Service Worker
+## 🚀 Features
 
-## Deployment ke Vercel
+### Core Features
+- ✅ User authentication with admin approval
+- ✅ Activity management and attendance tracking
+- ✅ Financial/treasury management
+- ✅ Feed/announcements
+- ✅ Calendar with national holidays
+- ✅ Automatic prayer times
+- ✅ Role-based access control
+- ✅ PWA installable (iOS & Android)
+
+### New Enhanced Features
+- ✨ **Interactive 3D Card Effects** - Smooth card transformations with depth
+- 🎨 **Glassmorphism UI** - Modern frosted glass design throughout
+- 🔍 **Smart Search System** - Fuzzy search across all content
+- 📱 **Social Media Sharing** - Share activities and announcements
+- 📲 **Enhanced PWA** - Better offline support and install prompts
+
+## 🛠️ Tech Stack
+
+- **Frontend**: HTML5, Tailwind CSS, Vanilla JavaScript (ES Modules)
+- **Backend**: Firebase v9 (Auth, Firestore, Functions)
+- **Media**: Cloudinary
+- **PWA**: Service Worker with smart caching
+- **Deployment**: Vercel
+
+## 📁 Project Structure
+
+```
+/
+├── public/              # Static assets
+│   ├── index.html      # Entry point
+│   ├── manifest.json   # PWA manifest
+│   ├── sw.js          # Service worker
+│   └── assets/        # Images & icons
+├── src/
+│   ├── components/    # Reusable UI components
+│   ├── pages/        # Page components
+│   ├── utils/        # Utility functions
+│   ├── styles/       # CSS files
+│   ├── features/     # New feature modules
+│   ├── main.js       # App bootstrap
+│   └── router.js     # Hash router
+├── functions/        # Firebase Cloud Functions
+├── firestore.rules   # Security rules
+└── vercel.json       # Deployment config
+```
+
+## 🚀 Deployment to Vercel
 
 ### Quick Deploy
-1. Hubungkan repository GitHub ke Vercel
-2. Vercel akan otomatis mendeteksi konfigurasi dari `vercel.json`
-3. Deploy akan menggunakan folder `KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL` sebagai output
+1. Connect your GitHub repository to Vercel
+2. Vercel auto-detects configuration from `vercel.json`
+3. Deploy!
 
-### Manual Configuration (jika diperlukan)
+### Manual Configuration
 - **Build Command**: None (static site)
-- **Output Directory**: `KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL`
-- **Install Command**: None
+- **Output Directory**: `public`
 - **Framework Preset**: Other
 
-## Firebase Setup
+## 🔧 Firebase Setup
 
 ### 1. Deploy Firebase Functions
 ```bash
-cd KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL/functions
+cd functions
 npm install
 cd ..
 firebase deploy --only functions
@@ -34,68 +75,74 @@ firebase deploy --only functions
 
 ### 2. Deploy Firestore Rules
 ```bash
-cd KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL
 firebase deploy --only firestore:rules
 ```
 
-## Fitur Utama
-- ✅ Autentikasi pengguna dengan persetujuan admin
-- ✅ Manajemen kegiatan dan absensi
-- ✅ Sistem keuangan/kas
-- ✅ Feed/pengumuman
-- ✅ Kalender dengan hari libur nasional
-- ✅ Jadwal sholat otomatis
-- ✅ Tema terang/gelap/sistem
-- ✅ Notifikasi offline/online
-- ✅ PWA installable (iOS & Android)
-- ✅ Role-based access control
-- ✅ Seasonal theme decorations
+## 🎨 Theme System
 
-## Struktur Proyek
-```
-KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL/
-├── index.html              # Entry point
-├── manifest.json           # PWA manifest
-├── sw.js                   # Service worker
-├── vercel.json            # Vercel config
-├── firestore.rules        # Security rules
-├── src/
-│   ├── main.js            # App bootstrap
-│   ├── router.js          # Hash router
-│   ├── render.js          # Page renderer
-│   ├── lib/               # Utilities
-│   ├── components/        # UI components
-│   └── pages/             # Page modules
-├── functions/             # Firebase Cloud Functions
-└── assets/                # Static assets
-```
+The app features a sophisticated theme system:
+- **Light/Dark/System** modes
+- **Seasonal decorations** (Ramadan, Independence Day, etc.)
+- **Glassmorphism** design with frosted glass effects
+- **3D card animations** with depth and shadows
 
-## Troubleshooting
+## 🔍 Smart Search
 
-### Stuck di Splash Screen
-1. Clear browser cache (Safari iOS: Settings > Safari > Clear History)
-2. Uninstall PWA dan install ulang
-3. Unregister Service Worker di DevTools
-4. Pastikan semua file ada di deployment
+The smart search feature includes:
+- **Fuzzy matching** - Find results even with typos
+- **Multi-field search** - Search across titles, descriptions, dates
+- **Real-time results** - Instant search as you type
+- **Keyboard shortcuts** - Press `/` to focus search
 
-### PWA tidak bisa di-install
-1. Pastikan site menggunakan HTTPS
-2. Cek manifest.json sudah accessible
-3. Pastikan semua icon tersedia
-4. Cek Service Worker registered dengan benar
+## 📱 PWA Features
 
-## Development
+Enhanced Progressive Web App capabilities:
+- **Install prompts** - Smart prompts for iOS and Android
+- **Offline support** - Works without internet connection
+- **Push notifications** - Stay updated (if enabled)
+- **App-like experience** - Full-screen, smooth animations
 
-### Local Development
-1. Gunakan local web server (contoh: `python -m http.server 8000`)
-2. Buka `http://localhost:8000/KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL/`
-3. Pastikan Firebase config sudah benar di `src/lib/firebase.js`
+## 🤝 Social Sharing
 
-### Update Service Worker
-Setiap kali ada perubahan file, update version number di `sw.js`:
-```javascript
-const CACHE = 'karteji-v1.8.7'; // increment version
-```
+Share content across platforms:
+- **Native sharing** - Uses Web Share API when available
+- **Social platforms** - Facebook, Twitter, WhatsApp, Email
+- **Copy link** - Quick link copying functionality
+- **Custom messages** - Formatted for each platform
 
-## License
+## 🛡️ Security
+
+- **Comprehensive Firestore rules** with role-based access
+- **Rate limiting** on Cloud Functions
+- **Input sanitization** to prevent XSS
+- **Secure authentication** with Firebase Auth
+- **CodeQL scanned** - Zero security alerts
+- **Dependency checked** - No known vulnerabilities
+
+## 📱 Browser Support
+
+- Chrome/Edge 90+
+- Safari 14+
+- Firefox 88+
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## 🐛 Troubleshooting
+
+### Stuck on Splash Screen
+1. Clear browser cache
+2. Unregister Service Worker (DevTools > Application > Service Workers)
+3. Reload the page
+
+### PWA Not Installing
+1. Ensure site uses HTTPS
+2. Check manifest.json is accessible
+3. Verify all icons are available
+4. Check Service Worker registered correctly
+
+## 📄 License
+
 Private - All rights reserved
+
+## 🎯 Version
+
+**v2.0.0** - Complete overhaul with modern architecture and features

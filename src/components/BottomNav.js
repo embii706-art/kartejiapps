@@ -1,5 +1,5 @@
 
-import { hapticTap } from '../lib/net.js';
+import { hapticTap } from '../utils/net.js';
 
 const items = [
   { hash:'#/home', icon:'home', label:'Beranda' },

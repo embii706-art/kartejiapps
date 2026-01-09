@@ -1,5 +1,5 @@
 
-const CACHE = 'karteji-v1.8.6';
+const CACHE = 'karteji-v2.0.0';
 const APP_SHELL = [
   './',
   './index.html',
@@ -8,14 +8,14 @@ const APP_SHELL = [
   './src/router.js',
   './src/render.js',
   './src/splashFinal.js',
-  './src/styles.css',
-  './src/lib/firebase.js',
-  './src/lib/gates.js',
-  './src/lib/theme.js',
-  './src/lib/net.js',
-  './src/lib/ui.js',
-  './src/lib/themeEvents.js',
-  './src/lib/cloudinary.js',
+  './src/styles/styles.css',
+  './src/utils/firebase.js',
+  './src/utils/gates.js',
+  './src/utils/theme.js',
+  './src/utils/net.js',
+  './src/utils/ui.js',
+  './src/utils/themeEvents.js',
+  './src/utils/cloudinary.js',
   './src/components/BottomNav.js',
   './src/components/Toast.js',
   './src/pages/index.js',

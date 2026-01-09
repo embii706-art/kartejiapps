@@ -1,8 +1,8 @@
 
 import { render } from './render.js';
 import * as pages from './pages/index.js';
-import { setTitle } from './lib/ui.js';
-import { authGate } from './lib/gates.js';
+import { setTitle } from './utils/ui.js';
+import { authGate } from './utils/gates.js';
 
 const routes = {
   '#/auth/masuk': pages.authMasuk,

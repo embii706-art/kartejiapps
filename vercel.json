@@ -1,6 +1,6 @@
 {
   "buildCommand": null,
-  "outputDirectory": "KARTEJI_SPA_v1.8.6_FINAL_VERCEL_SAFEMODE_FULL",
+  "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
