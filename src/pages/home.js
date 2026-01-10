@@ -4,7 +4,7 @@ export function home() {
       <div class="rounded-xl bg-card p-4 shadow">
         <h2 class="text-lg font-semibold">Beranda</h2>
         <p class="text-sm opacity-70">
-          Selamat datang di KARTEJI 👋
+          Halo! Selamat datang di KARTEJI 👋
         </p>
       </div>
 
