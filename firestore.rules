@@ -2,33 +2,206 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    /* =========================
+       UTIL FUNCTIONS
+    ========================== */
+
     function isSignedIn() {
       return request.auth != null;
     }
 
-    function isOwner(uid) {
-      return request.auth.uid == uid;
+    function profile(uid) {
+      return get(/databases/$(database)/documents/profiles/$(uid)).data;
     }
 
-    function hasRole(role) {
-      return role in get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.roles
-          || role in get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.extraRoles;
+    function myProfile() {
+      return profile(request.auth.uid);
     }
 
     function isApproved() {
-      return get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.approvalStatus == "approved";
+      return myProfile().approvalStatus == "approved";
     }
 
+    function hasRole(role) {
+      return role in myProfile().roles
+          || role in myProfile().extraRoles;
+    }
+
+    function hasAnyRole(roles) {
+      return roles.hasAny(myProfile().roles)
+          || roles.hasAny(myProfile().extraRoles);
+    }
+
+    function isAdmin() {
+      return hasAnyRole(["super_admin","ketua","wakil_ketua"]);
+    }
+
+    /* =========================
+       PROFILES
+    ========================== */
+
     match /profiles/{uid} {
-      allow read: if isSignedIn() && isOwner(uid);
-      allow create: if isSignedIn() && isOwner(uid);
+      // user hanya boleh baca profil sendiri
+      allow read: if isSignedIn() && request.auth.uid == uid;
+
+      // buat profil awal
+      allow create: if isSignedIn() && request.auth.uid == uid;
+
+      // role & approval HANYA via Cloud Functions
       allow update, delete: if false;
     }
 
-    match /activities/{id}/attendance/{uid} {
+    /* =========================
+       POSTS / FEED
+    ========================== */
+
+    match /posts/{postId} {
       allow read: if isSignedIn() && isApproved();
-      allow update: if isSignedIn() && isApproved()
-        && (hasRole("super_admin") || hasRole("ketua") || hasRole("wakil_ketua") || hasRole("sekretaris"));
+      allow create: if isSignedIn() && isApproved();
+      allow update, delete: if isSignedIn()
+        && isApproved()
+        && resource.data.authorUid == request.auth.uid;
+
+      match /comments/{commentId} {
+        allow read: if isSignedIn() && isApproved();
+        allow create: if isSignedIn() && isApproved();
+        allow delete: if isSignedIn()
+          && request.auth.uid == resource.data.authorUid;
+      }
     }
+
+    /* =========================
+       ACTIVITIES
+    ========================== */
+
+    match /activities/{activityId} {
+      allow read: if isSignedIn() && isApproved();
+
+      // hanya pengurus boleh buat / ubah kegiatan
+      allow create, update, delete: if isSignedIn()
+        && isApproved()
+        && hasAnyRole([
+          "super_admin",
+          "ketua",
+          "wakil_ketua",
+          "sekretaris",
+          "koordinator_sie"
+        ]);
+
+      /* ===== ATTENDANCE ===== */
+      match /attendance/{uid} {
+        allow read: if isSignedIn() && isApproved();
+
+        // absensi HANYA boleh diubah pengurus
+        allow update: if isSignedIn()
+          && isApproved()
+          && hasAnyRole([
+            "super_admin",
+            "ketua",
+            "wakil_ketua",
+            "sekretaris",
+            "koordinator_sie"
+          ]);
+
+        allow create, delete: if false;
+      }
+    }
+
+    /* =========================
+       FINANCE (KAS)
+    ========================== */
+
+    match /finance_transactions/{txId} {
+      allow read: if isSignedIn() && isApproved();
+
+      allow create, update, delete: if isSignedIn()
+        && isApproved()
+        && hasAnyRole([
+          "super_admin",
+          "ketua",
+          "bendahara"
+        ]);
+    }
+
+    /* =========================
+       ANNOUNCEMENTS
+    ========================== */
+
+    match /announcements/{id} {
+      allow read: if isSignedIn() && isApproved();
+
+      allow create, update, delete: if isSignedIn()
+        && isApproved()
+        && isAdmin();
+    }
+
+    /* =========================
+       DOCUMENTS & NOTULEN
+    ========================== */
+
+    match /documents/{id} {
+      allow read: if isSignedIn() && isApproved();
+
+      allow create, update, delete: if isSignedIn()
+        && isApproved()
+        && hasAnyRole([
+          "super_admin",
+          "ketua",
+          "sekretaris"
+        ]);
+    }
+
+    match /minutes/{id} {
+      allow read: if isSignedIn() && isApproved();
+
+      allow create, update, delete: if isSignedIn()
+        && isApproved()
+        && hasAnyRole([
+          "super_admin",
+          "ketua",
+          "sekretaris"
+        ]);
+    }
+
+    /* =========================
+       PRESENCE (ONLINE / OFFLINE)
+    ========================== */
+
+    match /presence/{uid} {
+      allow read: if isSignedIn() && isApproved();
+
+      // user hanya boleh update status dirinya sendiri
+      allow create, update: if isSignedIn()
+        && request.auth.uid == uid;
+
+      allow delete: if false;
+    }
+
+    /* =========================
+       CALENDAR EVENTS (NASIONAL / LOKAL)
+    ========================== */
+
+    match /calendar_events/{id} {
+      allow read: if isSignedIn();
+
+      // hanya cloud function / super admin
+      allow write: if isSignedIn()
+        && hasRole("super_admin");
+    }
+
+    /* =========================
+       RATE LIMIT / LOGS
+    ========================== */
+
+    match /rate_limits/{id} {
+      allow read, write: if false;
+    }
+
+    match /audit_logs/{id} {
+      allow read: if isSignedIn()
+        && hasRole("super_admin");
+      allow write: if false;
+    }
+
   }
 }
