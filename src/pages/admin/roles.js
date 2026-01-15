@@ -1,7 +1,7 @@
 import { collection, query, where, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { db, auth, functions } from "../lib/firebase.js";
+import { db, auth, functions } from "../../lib/firebase.js";
 import { httpsCallable } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-functions.js";
-import { toast } from "../components/Toast.js";
+import { toast } from "../../components/Toast.js";
 
 let unsubscribe = null;
 
